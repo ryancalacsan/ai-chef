@@ -1,32 +1,26 @@
 import { useState } from "react"
-import Header from "./Header"
 import AiRecipe from "./AiRecipe"
 import IngredientsList from "./IngridientsList"
-
-const apiKey = import.meta.env.VITE_API_KEY
+import { getRecipeFromMistral } from "./ai"
 
 function App() {
-  const [ingredients, setIngredients] = useState([
-    "all the main spices",
-    "pasta",
-    "ground beef",
-    "tomato paste",
-  ])
+  const [ingredients, setIngredients] = useState([])
 
   function addIngredient(formData) {
     const newIngredient = formData.get("ingredient")
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient])
   }
 
-  const [recipeShown, setRecipeShown] = useState(false)
+  const [recipe, setRecipe] = useState("")
 
-  function toggleRecipeShown() {
-    setRecipeShown((prevRecipeShown) => !prevRecipeShown)
+  async function getRecipe() {
+    console.log("clicked")
+    const recipeMarkdown = await getRecipeFromMistral(ingredients)
+    setRecipe(recipeMarkdown)
   }
 
   return (
-    <>
-      <Header />
+    <main>
       <form action={addIngredient}>
         <input
           type="text"
@@ -38,13 +32,10 @@ function App() {
         <button>Add ingredient</button>
       </form>
       {ingredients.length > 0 && (
-        <IngredientsList
-          ingredients={ingredients}
-          toggleRecipeShown={toggleRecipeShown}
-        />
+        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
       )}
-      {recipeShown && <AiRecipe />}
-    </>
+      {recipe && <AiRecipe recipe={recipe} />}
+    </main>
   )
 }
 
