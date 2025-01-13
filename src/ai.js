@@ -8,7 +8,7 @@ export async function getRecipeFromMistral(ingredientsArr) {
   const ingredientsString = ingredientsArr.join(", ")
   try {
     const chatCompletion = await client.chatCompletion({
-      model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+      model: "mistralai/Mistral-7B-Instruct-v0.3",
       messages: [
         {
           role: "system",
