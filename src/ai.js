@@ -1,6 +1,6 @@
 import { HfInference } from "@huggingface/inference"
 
-const apiKey = import.meta.env.VITE_API_KEY
+const apiKey = import.meta.env.VITE_HF_API_KEY
 
 const client = new HfInference(apiKey)
 
