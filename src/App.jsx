@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import AiRecipe from "./AiRecipe"
 import IngredientsList from "./IngridientsList"
 import { getRecipeFromMistral } from "./ai"
+import { ClipLoader } from "react-spinners"
 
 function App() {
   const [ingredients, setIngredients] = useState([])
@@ -12,6 +13,8 @@ function App() {
   }
 
   const [recipe, setRecipe] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const recipeSection = useRef(null)
 
   useEffect(() => {
@@ -22,8 +25,18 @@ function App() {
 
   async function getRecipe() {
     console.log("clicked")
-    const recipeMarkdown = await getRecipeFromMistral(ingredients)
-    setRecipe(recipeMarkdown)
+    setIsLoading(true) // Set loading to true
+    setError(null) // Reset any previous errors
+
+    try {
+      const recipeMarkdown = await getRecipeFromMistral(ingredients)
+      setRecipe(recipeMarkdown) // Update recipe state
+    } catch (err) {
+      console.error("Error fetching recipe:", err)
+      setError(err.message || "An unexpected error occurred") // Update error state
+    } finally {
+      setIsLoading(false) // Stop loading
+    }
   }
 
   return (
@@ -45,6 +58,21 @@ function App() {
           getRecipe={getRecipe}
         />
       )}
+      {isLoading && (
+        <>
+          <p>Your AI Cheff is Cooking up a Recipe...</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "20px",
+            }}
+          >
+            <ClipLoader color="#3498db" size={50} />
+          </div>
+        </>
+      )}
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {recipe && <AiRecipe recipe={recipe} />}
     </main>
   )
