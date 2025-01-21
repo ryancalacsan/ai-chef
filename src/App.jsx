@@ -40,16 +40,16 @@ function App() {
   }
 
   return (
-    <main>
-      <form action={addIngredient}>
-        <input
+    <main className="w-11/12 mx-auto max-w-xl">
+      <form className='flex gap-4   mx-auto' action={addIngredient}>
+        <input className="shadow w-full border-slate-200 border-2 rounded-md p-2"
           type="text"
           name="ingredient"
           id="ingredientInput"
           placeholder="e.g. garlic"
           aria-label="add ingredient"
         />
-        <button>Add ingredient</button>
+        <button className="bg-sky-900 text-sky-100 rounded-md w-40"  >Add ingredient</button>
       </form>
       {ingredients.length > 0 && (
         <IngredientsList
@@ -60,7 +60,7 @@ function App() {
       )}
       {isLoading && (
         <>
-          <p>Your AI Cheff is Cooking up a Recipe...</p>
+          <p className="text-center pt-8 italic text-lg">Your AI Chef is Cooking up a Recipe...</p>
           <div
             style={{
               display: "flex",

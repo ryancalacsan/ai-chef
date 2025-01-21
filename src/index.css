@@ -1,155 +1,29 @@
-/* css reset */
-/* 1. Use a more-intuitive box-sizing model */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* fetched recipe styling */
+
+.recipe {
+  padding-top: 1rem;
+  padding-inline: .5rem;
 }
 
-/* 2. Remove default margin */
-* {
-  margin: 0;
+/* recipe title */
+.recipe>p:first-child{
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
 }
 
-body {
-  /* 3. Add accessible line-height */
-  line-height: 1.5;
-  /* 4. Improve text rendering */
-  -webkit-font-smoothing: antialiased;
+/* recipe section titles */
+.recipe>p{
+font-weight: bold;
+padding-bottom: .5rem;
+padding-top: 1rem;
 }
 
-/* 5. Improve media defaults */
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-/* 6. Inherit fonts for form controls */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-/* 7. Avoid text overflows */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-/* 8. Improve line wrapping */
-p {
-  text-wrap: pretty;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
-}
-
-/*
-  9. Create a root stacking context
-*/
-#root,
-#__next {
-  isolation: isolate;
-}
-/* end of css reset */
-
-html {
-  background-color: lightgray;
-}
-
-body {
-  font-family: inter, sans-serif;
-  width: 750px;
-  margin: 0 auto;
-  padding: 25px;
-  background-color: #fafaf8;
-}
-
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  padding: 40px;
-  gap: 10px;
-}
-
-header img {
-  width: 40px;
-}
-
-header h1 {
-  font-size: 2rem;
-  font-weight: 500;
-}
-
-form {
-  display: flex;
-  gap: 1rem;
-  padding: 10px;
-}
-
-form input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid gray;
-}
-
-form button {
-  border-radius: 6px;
-  border: 1px solid gray;
-}
-
-.getRecipeContainer {
-  background-color: #f0efeb;
-  display: flex;
-  justify-content: space-between;
-  padding: 25px 40px;
-  border-radius: 10px;
-}
-
-.getRecipeContainer button {
-  background-color: #d17556;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  padding: 10px;
-}
-
-/* loading spinner */
-
-.spinner {
-  margin: 20px auto;
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #3498db; /* Change color as needed */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* recipe instructions */
+.recipe>ol>li{
+  padding-block: .5rem
 }
