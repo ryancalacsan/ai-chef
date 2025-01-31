@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
-import AiRecipe from "./AiRecipe"
-import IngredientsList from "./IngridientsList"
+import AiRecipe from "./components/AiRecipe"
+import IngredientsList from "./components/IngridientsList"
 import { getRecipeFromMistral } from "./ai"
 import { ClipLoader } from "react-spinners"
 
@@ -22,6 +22,9 @@ function App() {
   function addIngredient(formData) {
     const newIngredient = formData.get("ingredient")
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient])
+  }
+  function clearIngredientList(){
+    setIngredients([])
   }
 
   // Fetch recipe from AI
@@ -62,6 +65,7 @@ function App() {
           ref={recipeSection}
           ingredients={ingredients}
           getRecipe={getRecipe}
+          clearIngredientList={clearIngredientList}
         />
       ): (<p className="text-center p-8 text-lg">Add some ingredients you woud like to cook with!</p>)}
       {isLoading && (
